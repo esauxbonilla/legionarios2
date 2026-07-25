@@ -7,6 +7,8 @@ export const dynamic = "force-dynamic";
 let cache = { data: null, ts: 0 };
 const CACHE_MS = 8000;
 
+const ULTIMOS = 6; // cuántos registros recientes devolvemos para el feed en vivo
+
 export async function GET() {
   const now = Date.now();
   if (cache.data && now - cache.ts < CACHE_MS) {
@@ -14,12 +16,21 @@ export async function GET() {
   }
 
   const supabase = supabaseServer();
-  const { data, error } = await supabase.from("legionarios").select("estado");
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  const [conteoRes, ultimosRes] = await Promise.all([
+    supabase.from("legionarios").select("estado"),
+    supabase
+      .from("legionarios")
+      .select("id, estado, created_at")
+      .order("created_at", { ascending: false })
+      .limit(ULTIMOS),
+  ]);
+
+  if (conteoRes.error) {
+    return NextResponse.json({ error: conteoRes.error.message }, { status: 500 });
   }
 
+  const data = conteoRes.data;
   const conteo = {};
   for (const row of data) {
     conteo[row.estado] = (conteo[row.estado] || 0) + 1;
@@ -36,11 +47,20 @@ export async function GET() {
     }
   }
 
+  // Feed "últimos registros". Si la query falla, mandamos lista vacía:
+  // el front simplemente no pinta la columna.
+  const ultimos = (ultimosRes.data || []).map((row) => ({
+    numero: row.id,
+    estado: row.estado,
+    created_at: row.created_at,
+  }));
+
   const resultado = {
     conteoPorEstado: conteo, // { "CDMX": 214, "JAL": 172, ... }
     total,
     estadosConquistados,
     estadoLider,
+    ultimos, // [{ numero, estado, created_at }]
   };
 
   cache = { data: resultado, ts: now };
