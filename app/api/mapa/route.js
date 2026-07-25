@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { supabaseServer } from "@/lib/supabaseServer";
+export const dynamic = "force-dynamic";
 
 // Cache en memoria simple (vive mientras la función serverless esté "caliente").
 // Evita pegarle a la base en cada carga de página si hay mucho tráfico.
