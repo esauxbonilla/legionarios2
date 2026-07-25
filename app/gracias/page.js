@@ -1,8 +1,9 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function Gracias() {
+function GraciasContent() {
   const params = useSearchParams();
   const numero = params.get("n");
 
@@ -16,5 +17,13 @@ export default function Gracias() {
         Guarda este número. Pronto habrá una mecánica de referidos — te avisaremos por WhatsApp.
       </p>
     </main>
+  );
+}
+
+export default function Gracias() {
+  return (
+    <Suspense fallback={null}>
+      <GraciasContent />
+    </Suspense>
   );
 }
