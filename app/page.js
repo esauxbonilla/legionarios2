@@ -646,19 +646,38 @@ export default function Home() {
               ))}
             </select>
             <input
-              placeholder="TU TALLA (C, M, L)"
+              placeholder="TU TALLA (CH, M, G)"
               required
               value={form.talla}
               onChange={campo("talla")}
               style={inputBase}
             />
-            <input
-              placeholder="TIPO DE PRENDA FAVORITA AL ENTRENAR"
-              required
-              value={form.prenda}
-              onChange={campo("prenda")}
-              style={inputBase}
-            />
+            {/* Único campo con label: la pregunta no cabe en el placeholder,
+                y el placeholder se va a los ejemplos. Ocupa fila completa para
+                que el label no descuadre al campo de talla que va a su lado. */}
+            <div style={{ gridColumn: "1 / -1" }}>
+              <label
+                htmlFor="prenda"
+                style={{
+                  display: "block",
+                  fontSize: 10,
+                  letterSpacing: ".18em",
+                  textTransform: "uppercase",
+                  color: TENUE,
+                  marginBottom: 7,
+                }}
+              >
+                ¿Qué tipo de prenda y corte es tu favorito para entrenar?
+              </label>
+              <input
+                id="prenda"
+                placeholder="Playera Oversize, Shorts, Jogger Baggy, Tank"
+                required
+                value={form.prenda}
+                onChange={campo("prenda")}
+                style={inputBase}
+              />
+            </div>
             <input
               placeholder="INSTAGRAM"
               required
