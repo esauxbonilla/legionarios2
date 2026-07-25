@@ -7,10 +7,6 @@ import { ESTADOS_PATHS } from "@/lib/estadosPaths";
 const VIEW_W = 975.5368;
 const VIEW_H = 654.81897;
 
-// Territorio sin conquistar: rojo muy apagado, pero visible. La silueta del
-// país siempre se lee; lo que cambia con los registros es la intensidad.
-const OPACIDAD_BASE = 0.16;
-
 export default function MapaMexico({
   conteoPorEstado = {},
   estadoSeleccionado = "",
@@ -35,25 +31,15 @@ export default function MapaMexico({
     >
       {ESTADOS_PATHS.map((estado) => {
         const count = conteoPorEstado[estado.code] || 0;
+        const intensidad = count / maxCount; // 0 a 1
         const activo = hover === estado.code || estadoSeleccionado === estado.code;
 
-        // Escala logarítmica en vez de lineal: si un estado se dispara a 500 y
-        // el resto anda en 20, con escala lineal el mapa entero se apaga. Así
-        // los primeros registros de cada estado sí se notan.
-        const intensidad =
-          count === 0 ? 0 : Math.log(count + 1) / Math.log(maxCount + 1);
-
-        const opacidad = OPACIDAD_BASE + intensidad * (1 - OPACIDAD_BASE);
-        const fill = `rgba(255, 26, 46, ${opacidad.toFixed(3)})`;
-
-        // El glow solo aparece con registros y crece con ellos: el brillo es la
-        // recompensa visual de conquistar, no decoración del mapa vacío.
+        const fill =
+          count === 0 ? "#0d0d0d" : `rgba(255, 26, 46, ${0.18 + intensidad * 0.82})`;
         const glow =
           count === 0
             ? "none"
-            : `drop-shadow(0 0 ${2 + intensidad * 9}px rgba(255,26,46,${(
-                0.35 + intensidad * 0.5
-              ).toFixed(2)}))`;
+            : `drop-shadow(0 0 ${2 + intensidad * 9}px rgba(255,26,46,0.85))`;
 
         return (
           <path
@@ -61,7 +47,7 @@ export default function MapaMexico({
             data-estado={estado.code}
             d={estado.d}
             fill={fill}
-            stroke={activo ? "#ffffff" : "rgba(255, 90, 105, .35)"}
+            stroke={activo ? "#ffffff" : "#1f1f1f"}
             strokeWidth={activo ? 1.4 : 0.5}
             style={{
               cursor: onSelectEstado ? "pointer" : "default",

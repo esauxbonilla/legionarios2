@@ -151,7 +151,11 @@ export default function Home() {
         return;
       }
       await cargarMapa();
-      router.push(`/gracias?n=${data.numero_legionario}&e=${form.estado}`);
+      router.push(
+        `/gracias?n=${data.numero_legionario}&e=${form.estado}&nom=${encodeURIComponent(
+          form.nombre
+        )}`
+      );
     } catch (err) {
       setEnviando(false);
       setError("No pudimos conectar. Revisa tu internet e inténtalo otra vez.");
@@ -238,14 +242,13 @@ export default function Home() {
               animation: "legRise .9s ease .08s both",
             }}
           >
-            Toma tu
+            La Legión
             <br />
-            estado
+            ya tiene
             <br />
             <span style={{ color: ROJO }}>
-              antes que
-              <br />
-              nadie
+              armadura
+              
             </span>
           </h1>
           <p
@@ -259,7 +262,34 @@ export default function Home() {
               animation: "legRise .9s ease .16s both",
             }}
           >
-            {CUPO_TOTAL.toLocaleString("es-MX")} pasaportes numerados. Acceso 24 h antes del drop.
+            La primera colección de Bastián Almaráz.
+          </p>
+          <p
+            style={{
+              maxWidth: 460,
+              fontSize: 14,
+              lineHeight: 1.8,
+              color: "#9a9a9a",
+              margin: "24px 0 0",
+              textWrap: "pretty",
+              animation: "legRise .9s ease .16s both",
+            }}
+          >
+            {CUPO_TOTAL.toLocaleString("es-MX")} pasaportes numerados. Tener el tuyo te dará acceso horas antes del drop, una fiesta privada, preventa y más sorpresas.
+            
+          </p>
+
+          <p
+            style={{
+              maxWidth: 460,
+              fontSize: 14,
+              lineHeight: 1.8,
+              color: "#9a9a9a",
+              margin: "24px 0 0",
+              textWrap: "pretty",
+              animation: "legRise .9s ease .16s both",
+            }}
+          >
             Cada registro pinta tu estado en el mapa nacional.
           </p>
           <div
@@ -496,9 +526,9 @@ export default function Home() {
           <div style={labelChip}>Calendario</div>
           <div style={{ display: "flex", flexDirection: "column", gap: 16, marginTop: 18 }}>
             {[
-              ["EXP", "EXPECTATIVA", "finales de julio · registro abierto", true],
+              ["EXP", "EPISODIO #1 ", "27 de Julio · registro abierto", true],
               ["REV", "REVELACIÓN", "semana del 3 de agosto", false],
-              ["DRP", "LANZAMIENTO", "semana del 10 · la lista entra 24 h antes", false],
+              ["DRP", "LANZAMIENTO", "??? · la lista entra 24 h antes", false],
             ].map(([sigla, titulo, nota, activo]) => (
               <div key={sigla} style={{ display: "flex", gap: 14 }}>
                 <span style={{ color: activo ? ROJO : TENUE, fontSize: 12 }}>{sigla}</span>
@@ -616,14 +646,14 @@ export default function Home() {
               ))}
             </select>
             <input
-              placeholder="TALLA"
+              placeholder="TU TALLA (C, M, L)"
               required
               value={form.talla}
               onChange={campo("talla")}
               style={inputBase}
             />
             <input
-              placeholder="PRENDA"
+              placeholder="TIPO DE PRENDA FAVORITA AL ENTRENAR"
               required
               value={form.prenda}
               onChange={campo("prenda")}
