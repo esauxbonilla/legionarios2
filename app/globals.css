@@ -1,0 +1,76 @@
+/* LEGIONARIOS — resets, tipografía base y animaciones.
+   Todo lo demás vive como estilos inline en los componentes. */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #050505;
+  color: #f2f2f2;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: #ff1a2e;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #f2f2f2;
+}
+
+input,
+select,
+button {
+  font-family: inherit;
+  font-size: 16px; /* evita el zoom automático de iOS al enfocar */
+}
+
+input::placeholder {
+  color: #5a5a5a;
+}
+
+@keyframes legPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes legRise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes legScan {
+  from {
+    transform: translateY(-4px);
+  }
+  to {
+    transform: translateY(760px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
