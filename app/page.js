@@ -534,6 +534,18 @@ export default function Home() {
             priority
             style={{ objectFit: "cover", objectPosition: "center 32%" }}
           />
+          {/* Difumina arriba y abajo contra el fondo para que la foto no se
+              lea como un rectángulo pegado, sino como parte de la página. */}
+          <div
+            aria-hidden
+            style={{
+              position: "absolute",
+              inset: 0,
+              pointerEvents: "none",
+              background:
+                "linear-gradient(to bottom, #050505 0%, rgba(5,5,5,.55) 12%, rgba(5,5,5,0) 30%, rgba(5,5,5,0) 66%, rgba(5,5,5,.6) 88%, #050505 100%)",
+            }}
+          />
         </div>
 
         <div
