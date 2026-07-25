@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ESTADOS } from "@/lib/estados";
 import { haceCuanto } from "@/lib/tiempo";
@@ -522,33 +523,17 @@ export default function Home() {
           borderBottom: `1px solid ${LINEA}`,
         }}
       >
-        {/* Reemplaza este bloque por la foto de campaña (next/image, horizontal 3:2) */}
-        <div
-          style={{
-            minHeight: 320,
-            background: "repeating-linear-gradient(135deg, #0b0b0b 0 12px, #070707 12px 24px)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: 40,
-          }}
-        >
-          <span
-            style={{
-              fontSize: 11,
-              letterSpacing: ".2em",
-              textTransform: "uppercase",
-              color: "#3d3d3d",
-              textAlign: "center",
-              lineHeight: 1.9,
-            }}
-          >
-            Foto de campaña
-            <br />
-            grupo · calle noche
-            <br />
-            horizontal 3:2
-          </span>
+        {/* Foto de campaña. Es vertical (2:3), así que se recorta con object-fit
+            y se ancla arriba para no perder la cara al colapsar en móvil. */}
+        <div style={{ position: "relative", minHeight: 460, background: "#070707" }}>
+          <Image
+            src="/hoodie.jpg"
+            alt="Legionario con la capucha puesta, retrato nocturno en blanco y negro"
+            fill
+            sizes="(max-width: 700px) 100vw, 50vw"
+            priority
+            style={{ objectFit: "cover", objectPosition: "center 32%" }}
+          />
         </div>
 
         <div
