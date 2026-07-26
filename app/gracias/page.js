@@ -8,7 +8,7 @@ import { ESTADOS } from "@/lib/estados";
 import { ESTADOS_PATHS } from "@/lib/estadosPaths";
 
 // ── Configuración de campaña ──────────────────────────────────────────────
-const URL_WHATSAPP = "https://chat.whatsapp.com/XXXXXXXXXXXXXXX"; // ← pega tu invitación real
+const URL_WHATSAPP = "https://chat.whatsapp.com/EEMgGq44580E3KoOhMM3an?s=cl&p=i&mlu=4"; // ← pega tu invitación real
 const DROP = "01";
 const ACCESO = "Early Access";
 const FECHA_DROP = "10 ago 2026";

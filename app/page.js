@@ -207,7 +207,7 @@ export default function Home() {
               animation: "legPulse 1.6s ease-in-out infinite",
             }}
           />
-          Registro abierto · Drop {FECHA_DROP}
+          Registro abierto · Drop ?? / 08 / 26
         </span>
       </div>
 
@@ -230,68 +230,25 @@ export default function Home() {
           >
             // Operación: conquista nacional
           </div>
-          <h1
+          {/* El titular ("La Legión ya tiene armadura") viene quemado dentro de
+              la imagen de campaña, por eso aquí no hay <h1> de texto: el alt
+              carga el mismo mensaje para lectores de pantalla y buscadores. */}
+          <div
             style={{
-              ...display,
-              fontWeight: 800,
-              fontSize: "clamp(38px, 6.2vw, 66px)",
-              lineHeight: 1.02,
-              letterSpacing: ".01em",
-              textTransform: "uppercase",
               margin: "22px 0 0",
               animation: "legRise .9s ease .08s both",
             }}
           >
-            La Legión
-            <br />
-            ya tiene
-            <br />
-            <span style={{ color: ROJO }}>
-              armadura
-              
-            </span>
-          </h1>
-          <p
-            style={{
-              maxWidth: 460,
-              fontSize: 14,
-              lineHeight: 1.8,
-              color: "#9a9a9a",
-              margin: "24px 0 0",
-              textWrap: "pretty",
-              animation: "legRise .9s ease .16s both",
-            }}
-          >
-            La primera colección de Bastián Almaráz.
-          </p>
-          <p
-            style={{
-              maxWidth: 460,
-              fontSize: 14,
-              lineHeight: 1.8,
-              color: "#9a9a9a",
-              margin: "24px 0 0",
-              textWrap: "pretty",
-              animation: "legRise .9s ease .16s both",
-            }}
-          >
-            {CUPO_TOTAL.toLocaleString("es-MX")} pasaportes numerados. Tener el tuyo te dará acceso horas antes del drop, una fiesta privada, preventa y más sorpresas.
-            
-          </p>
-
-          <p
-            style={{
-              maxWidth: 460,
-              fontSize: 14,
-              lineHeight: 1.8,
-              color: "#9a9a9a",
-              margin: "24px 0 0",
-              textWrap: "pretty",
-              animation: "legRise .9s ease .16s both",
-            }}
-          >
-            Cada registro pinta tu estado en el mapa nacional.
-          </p>
+            <Image
+              src="/compresion.png"
+              alt="La Legión ya tiene armadura · Drop 001 · ?? / 08 / 26"
+              width={1080}
+              height={1230}
+              priority
+              sizes="(max-width: 700px) 100vw, 50vw"
+              style={{ width: "100%", height: "auto", display: "block" }}
+            />
+          </div>
           <div
             style={{
               display: "flex",
@@ -331,6 +288,46 @@ export default function Home() {
               Ver mapa en vivo
             </a>
           </div>
+
+          <p
+            style={{
+              maxWidth: 460,
+              fontSize: 14,
+              lineHeight: 1.8,
+              color: "#9a9a9a",
+              margin: "30px 0 0",
+              textWrap: "pretty",
+              animation: "legRise .9s ease .3s both",
+            }}
+          >
+            La primera colección de Bastián Almaráz.
+          </p>
+          <p
+            style={{
+              maxWidth: 460,
+              fontSize: 14,
+              lineHeight: 1.8,
+              color: "#9a9a9a",
+              margin: "24px 0 0",
+              textWrap: "pretty",
+              animation: "legRise .9s ease .3s both",
+            }}
+          >
+            {CUPO_TOTAL.toLocaleString("es-MX")} pasaportes numerados. Tener el tuyo te dará acceso horas antes del drop, una fiesta privada, preventa y más sorpresas.
+          </p>
+          <p
+            style={{
+              maxWidth: 460,
+              fontSize: 14,
+              lineHeight: 1.8,
+              color: "#9a9a9a",
+              margin: "24px 0 0",
+              textWrap: "pretty",
+              animation: "legRise .9s ease .3s both",
+            }}
+          >
+            Cada registro pinta tu estado en el mapa nacional.
+          </p>
 
           <div
             style={{
